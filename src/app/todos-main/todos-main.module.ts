@@ -10,6 +10,9 @@ import {MatTableModule} from '@angular/material/table';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '../../environments/environment';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+import {FormsModule} from '@angular/forms';
 
 
 
@@ -29,6 +32,9 @@ import {environment} from '../../environments/environment';
     MatTableModule,
     AngularFirestoreModule,
     AngularFireModule.initializeApp(environment.firebase),
+    MatButtonModule,
+    MatIconModule,
+    FormsModule,
   ]
 })
 export class TodosMainModule { }

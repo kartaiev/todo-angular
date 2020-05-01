@@ -8,11 +8,19 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+import {MatListModule} from '@angular/material/list';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,
@@ -22,6 +30,12 @@ import {AngularFirestoreModule} from '@angular/fire/firestore';
     TodosMainModule,
     BrowserAnimationsModule,
     MatToolbarModule,
+    MatSidenavModule,
+    MatButtonToggleModule,
+    MatButtonModule,
+    MatIconModule,
+    MatListModule,
+    MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent]

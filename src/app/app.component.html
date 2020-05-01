@@ -1,7 +1,23 @@
-<mat-toolbar color="primary">
+<mat-toolbar class="mat-elevation-z15" color="primary">
+  <button
+    class="hamburger"
+    (click)="sidenavToggle()"
+    aria-label="Toggle sidenav"
+    mat-icon-button
+    type="button">
+    <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+  </button>
   <span>TODO-ZEN</span>
 </mat-toolbar>
 
-<app-todos-home></app-todos-home>
+<mat-sidenav-container>
+  <mat-sidenav [(opened)]="opened" class="mat-elevation-z1" mode="side">
+    <app-sidebar></app-sidebar>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-todos-home></app-todos-home>
+  </mat-sidenav-content>
 
+
+</mat-sidenav-container>
 

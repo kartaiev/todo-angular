@@ -1,5 +1,3 @@
-export interface IPriority {
-  id: number;
-  title: string;
-  color: string;
+export interface IPr {
+  background: string;
 }

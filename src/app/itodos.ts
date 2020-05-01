@@ -4,4 +4,5 @@ export interface ITodos {
   completed: boolean;
   created: Date;
   deadline: Date;
+  priority: string;
 }

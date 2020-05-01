@@ -1,0 +1,18 @@
+mat-sidenav-container {
+  height: 100vh;
+}
+
+mat-sidenav, mat-sidenav-content {
+  padding: 16px;
+}
+
+mat-sidenav {
+  width: 300px;
+  background: #2d2d2d;
+}
+
+.hamburger {
+  margin: 0 30px 0 15px;
+}
+
+
