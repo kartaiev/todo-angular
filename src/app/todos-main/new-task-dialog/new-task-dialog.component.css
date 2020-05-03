@@ -1,0 +1,29 @@
+.mat-dialog-content {
+  width: 100%;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.horizontal {
+  padding: 0;
+}
+
+.mat-list-item {
+  display: inline-block;
+  height: auto;
+  width: 50px;
+}
+
+.priority {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+}
+
+.datepicker {
+  margin-left: 20px;
+  width: 150px;
+}
+

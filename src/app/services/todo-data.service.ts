@@ -25,16 +25,14 @@ export class TodoDataService {
     );
   }
 
-  async addTask(obj): Promise<void> {
-    try {
-      await this.db.collection('tasks').add(obj);
-    } catch {
-      console.error('error');
+addTask(obj: ITodos): void {
+    if (obj.task)  {
+      from(this.db.collection('tasks').add(obj));
     }
   }
 
-  completeTask(id: number): void {
-    from(this.db.doc(`tasks/${id}`).update({completed: true}));
+  updateTask(id: number, data: ITodos): void {
+    from(this.db.doc(`tasks/${id}`).update(data));
   }
 
   deleteTask(id: number): void {

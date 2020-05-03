@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Priority} from '../dictionary';
-import {IPr} from '../interfaces/ipriority';
+import {IBackgound, IColor} from '../interfaces/ipriority';
 
 @Injectable({
   providedIn: 'root'
@@ -9,13 +9,13 @@ export class SharedService {
 
   constructor() { }
 
-  priorityToColor(priority: string) {
+  priorityToColor(priority: string, atr: boolean): IBackgound | IColor {
     if (priority === Priority.HIGH) {
-      return {background: '#fe346e'};
+      return atr ? {background: '#fe346e'} : {color: '#fe346e'};
     } else if (priority === Priority.MEDIUM) {
-      return {background: '#ffd31d'};
+      return atr ? {background: '#ffd31d'} : {color: '#ffd31d'};
     } else if (priority === Priority.LOW) {
-      return {background: '#69F1AE'};
+      return atr ? {background: '#69F1AE'} : {color: '#69F1AE'};
     } else {
       return {background: 'none'};
     }
