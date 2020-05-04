@@ -1,0 +1,45 @@
+<mat-list>
+  <h2>Inbox</h2>
+  <mat-divider></mat-divider>
+  <mat-list-item *ngFor="let task of todos">
+    <div class="left">
+      <div
+        [ngStyle]="priorityColor(task.priority, true)"
+        class="priority"></div>
+      <mat-checkbox
+        (change)="completedTask(task.id, task)"
+        [(ngModel)]="isCompleted">
+      </mat-checkbox>
+      <div class="task-wrap">
+        <span class="task">{{task.task}}</span>
+        <button
+          class="deadline">{{task.deadline * 1000 | date: 'MMM-dd'}}
+        </button>
+      </div>
+    </div>
+    <button
+      (click)="openToUpdate(task.id)"
+      class="update-icon"
+      mat-icon-button>
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button
+      (click)="deleteTask(task.id)"
+      class="delete-icon"
+      mat-icon-button>
+      <mat-icon>delete_outline</mat-icon>
+    </button>
+    <mat-divider></mat-divider>
+  </mat-list-item>
+  <button
+    class="add-icon"
+    mat-icon-button
+    (click)="openDialog()"
+  >
+    <mat-icon>add</mat-icon>
+    <span class="add-task">new task</span>
+  </button>
+</mat-list>
+
+
+

@@ -1,0 +1,40 @@
+<mat-list>
+  <mat-list-item>
+    <button
+      mat-icon-button
+      type="button">
+      <mat-icon>inbox</mat-icon>
+    </button>
+    Inbox
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  <mat-list-item>
+    <button
+      mat-icon-button
+      type="button">
+      <mat-icon>today</mat-icon>
+    </button>
+    Today
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <button class="priority-btn"
+            mat-icon-button>
+            <mat-icon>flag</mat-icon>
+            <span class="priority-header">Priority</span>
+          </button>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-list>
+        <mat-list-item *ngFor="let fltr of filters">
+            <span [ngStyle]="priorityColor(fltr, true)" class="priority"></span>
+            {{fltr}}
+            <mat-divider></mat-divider>
+        </mat-list-item>
+      </mat-list>
+    </mat-expansion-panel>
+  </mat-accordion>
+</mat-list>
