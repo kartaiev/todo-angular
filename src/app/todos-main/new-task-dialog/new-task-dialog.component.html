@@ -2,7 +2,7 @@
 <div mat-dialog-content>
     <mat-form-field appearance="outline">
       <mat-label>task</mat-label>
-      <input matInput placeholder="task" [(ngModel)]="data.task">
+      <input matInput [value]="data.task" [(ngModel)]="data.task">
       <mat-icon matSuffix>
         <div
           [ngStyle]="color"
@@ -25,9 +25,9 @@
      </button>
    </mat-list-item>
  </mat-list>
-  <mat-form-field class="datepicker" (change)="setDeadline()">
+  <mat-form-field class="datepicker">
     <mat-label>Choose a date</mat-label>
-    <input matInput [matDatepicker]="myPicker" [(ngModel)]="date" (dateChange)="setDeadline()">
+    <input matInput [matDatepicker]="myPicker" [formControl]="serializedDate" (dateChange)="setDeadline()">
     <mat-datepicker-toggle matSuffix [for]="myPicker"></mat-datepicker-toggle>
     <mat-datepicker #myPicker></mat-datepicker>
   </mat-form-field>

@@ -3,31 +3,21 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {ITodos} from '../../itodos';
 import {SharedService} from '../../services/shared.service';
 import {Priority} from '../../dictionary';
-import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
-import {FormControl} from '@angular/forms';
-import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
-// @ts-ignore
-import * as _moment from 'moment';
-// @ts-ignore
-import {default as _rollupMoment} from 'moment';
 import {IBackgound, IColor} from '../../interfaces/ipriority';
+import {FormControl} from '@angular/forms';
 
-const moment = _rollupMoment || _moment;
 
 @Component({
   selector: 'app-new-task-dialog',
   templateUrl: './new-task-dialog.component.html',
   styleUrls: ['./new-task-dialog.component.css'],
-  providers: [
-    {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
-    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
-  ],
 })
 
 export class NewTaskDialogComponent {
   priorities = [Priority.HIGH, Priority.MEDIUM, Priority.LOW];
   color: object;
-  date = new FormControl(moment(new Date()));
+  date = new FormControl(new Date());
+  serializedDate = new FormControl((new Date()).toISOString());
 
   constructor(
     private sharedService: SharedService,
@@ -36,6 +26,8 @@ export class NewTaskDialogComponent {
   }
 
   onNoClick(): void {
+    this.data.task = '';
+    this.data.priority = '';
     this.dialogRef.close();
   }
 
@@ -48,7 +40,8 @@ export class NewTaskDialogComponent {
     this.data.priority = priority;
   }
 
-  setDeadline() {
-    this.data.deadline = moment(this.date).format();
+  setDeadline(): void {
+    console.log(this.data.id);
+    this.data.deadline = new Date(this.serializedDate.value);
   }
 }

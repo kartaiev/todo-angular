@@ -18,7 +18,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatMomentDateModule} from '@angular/material-moment-adapter';
+import {MatNativeDateModule} from '@angular/material/core';
 
 @NgModule({
   declarations: [TodosHomeComponent, NewTaskDialogComponent],
@@ -42,7 +42,7 @@ import {MatMomentDateModule} from '@angular/material-moment-adapter';
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,
-    MatMomentDateModule,
+    MatNativeDateModule,
     ReactiveFormsModule
   ]
 })
