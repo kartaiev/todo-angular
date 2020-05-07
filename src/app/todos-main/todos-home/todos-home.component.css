@@ -57,6 +57,19 @@ mat-checkbox {
   cursor: pointer;
 }
 
+.deadlineCompleted {
+  font-weight: lighter;
+  font-size: .8rem;
+  background: none;
+  border: none;
+  outline: none;
+  color: lightgrey;
+  text-align: left;
+  padding: 0;
+  cursor: default;
+  text-decoration: line-through;
+}
+
 .add-icon {
   font-weight: lighter;
   margin: 1vh 30px;
@@ -64,6 +77,11 @@ mat-checkbox {
 
 .add-task {
   margin-left: 10px;
+}
+
+.completed {
+  text-decoration: line-through;
+  color: #9f9f9f;
 }
 
 

@@ -1,5 +1,5 @@
 <mat-list>
-  <mat-list-item>
+  <mat-list-item (click)="toInbox()">
     <button
       mat-icon-button
       type="button">
@@ -30,11 +30,19 @@
       </mat-expansion-panel-header>
       <mat-list>
         <mat-list-item *ngFor="let fltr of filters">
-            <span [ngStyle]="priorityColor(fltr, true)" class="priority"></span>
+            <span [ngStyle]="priorityColor(fltr, true, true)" class="priority"></span>
             {{fltr}}
             <mat-divider></mat-divider>
         </mat-list-item>
       </mat-list>
     </mat-expansion-panel>
   </mat-accordion>
+  <mat-list-item (click)="toCompleted()">
+    <button
+      mat-icon-button
+      type="button">
+      <mat-icon>check_box</mat-icon>
+    </button>
+    Completed
+  </mat-list-item>
 </mat-list>

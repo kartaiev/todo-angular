@@ -1,23 +1,28 @@
 <mat-list>
-  <h2>Inbox</h2>
+  <h2>{{listTitle()}}</h2>
   <mat-divider></mat-divider>
-  <mat-list-item *ngFor="let task of todos">
+  <mat-list-item *ngFor="let task of isCurrent ? todos : completedTodos">
     <div class="left">
       <div
-        [ngStyle]="priorityColor(task.priority, true)"
+        [ngStyle]="priorityColor(task.priority, true, isCurrent)"
         class="priority"></div>
       <mat-checkbox
         (change)="completedTask(task.id, task)"
-        [(ngModel)]="isCompleted">
+        [(ngModel)]="isCompleted"
+        [class.mat-checkbox-checked]="isCompleted || task.completed ">
+
       </mat-checkbox>
       <div class="task-wrap">
-        <span class="task">{{task.task}}</span>
+        <span [ngClass]="{completed: task.completed || isCompleted}" class="task">{{task.task}}</span>
         <button
-          class="deadline">{{task.deadline * 1000 | date: 'MMM-dd'}}
+          [ngClass]="{'deadline': isCurrent, 'deadlineCompleted': !isCurrent}"
+          class="deadline">
+          {{task.deadline * 1000 | date: 'MMM-dd'}}
         </button>
       </div>
     </div>
     <button
+      *ngIf="isCurrent"
       (click)="openToUpdate(task.id)"
       class="update-icon"
       mat-icon-button>
@@ -31,10 +36,10 @@
     </button>
     <mat-divider></mat-divider>
   </mat-list-item>
-  <button
+  <button *ngIf="isCurrent"
+    (click)="openToCreate()"
     class="add-icon"
     mat-icon-button
-    (click)="openDialog()"
   >
     <mat-icon>add</mat-icon>
     <span class="add-task">new task</span>

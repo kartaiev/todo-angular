@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {ITodos} from '../itodos';
-import {from, Observable} from 'rxjs';
+import {BehaviorSubject, from, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {AngularFirestore} from '@angular/fire/firestore';
 
@@ -9,8 +9,17 @@ import {AngularFirestore} from '@angular/fire/firestore';
 })
 export class TodoDataService {
 
+  private isCurrent = new BehaviorSubject<boolean>(true);
+  isCurrent$ = this.isCurrent.asObservable();
+
+
   constructor(private db: AngularFirestore) {
   }
+
+  setIsCurrent(isCurrent: boolean): void {
+    this.isCurrent.next(isCurrent);
+  }
+
 
   getTodos(): Observable<ITodos[]> {
     return this.db.collection<ITodos>('tasks').snapshotChanges().pipe(
@@ -25,8 +34,8 @@ export class TodoDataService {
     );
   }
 
-addTask(obj: ITodos): void {
-    if (obj.task)  {
+  addTask(obj: ITodos): void {
+    if (obj.task) {
       from(this.db.collection('tasks').add(obj));
     }
   }

@@ -13,8 +13,9 @@ import {IBackgound, IColor} from '../../interfaces/ipriority';
 })
 export class TodosHomeComponent implements OnInit {
   todos: ITodos[];
-  todo: any;
+  completedTodos: ITodos[];
   isCompleted = false;
+  isCurrent: boolean;
   private task: string;
   private deadline: Date;
   private priority: string;
@@ -28,11 +29,21 @@ export class TodosHomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.dataService.isCurrent$.subscribe(isCurrent => this.isCurrent = isCurrent);
     this.refreshTodos();
   }
 
-  priorityColor(priority: string, atr: boolean): IBackgound | IColor {
-    return this.sharedService.priorityToColor(priority, atr);
+  listTitle(): string {
+    if (this.isCurrent) {
+      return 'Inbox';
+    } else {
+      return 'Completed';
+    }
+  }
+
+
+  priorityColor(priority: string, atr: boolean, completed: boolean): IBackgound | IColor {
+    return this.sharedService.priorityToColor(priority, atr, completed);
   }
 
   deleteTask(id: number): void {
@@ -40,17 +51,20 @@ export class TodosHomeComponent implements OnInit {
     this.refreshTodos();
   }
 
-  completedTask(id: number, data): void {
+  completedTask(id: number, data: ITodos): void {
     if (this.isCompleted) {
-      this.dataService.updateTask(id, {...data, completed: true});
+      this.dataService.updateTask(id, {...data, completed: !data.completed});
+      this.isCompleted = !this.isCompleted;
+      this.refreshTodos();
     }
   }
 
   refreshTodos(): void {
-    this.dataService.getTodos().subscribe(tasks => this.todos = tasks);
+    this.dataService.getTodos().subscribe(tasks => this.todos = tasks.filter(task => !task.completed));
+    this.dataService.getTodos().subscribe(tasks => this.completedTodos = tasks.filter(task => task.completed));
   }
 
-  openToUpdate(id) {
+  openToUpdate(id): void {
     this.todos.map(todo => {
       if (todo.id === id) {
         this.task = todo.task;
@@ -59,18 +73,27 @@ export class TodosHomeComponent implements OnInit {
         this.id = todo.id;
       }
     });
-    this.openDialog();
+    this.openDialog({task: this.task, priority: this.priority, deadline: this.deadline, id: this.id});
   }
 
-  openDialog(): void {
+  openToCreate(): void {
+    this.openDialog({task: this.task, priority: this.priority, deadline: this.deadline});
+  }
+
+  openDialog(data): void {
     const dialogRef = this.dialog.open(NewTaskDialogComponent, {
       width: '540px',
-      data: {task: this.task, priority: this.priority, deadline: this.deadline}
+      data: {...data}
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.dataService.addTask({completed: false, created: new Date(), ...result});
+      result.id
+        ?
+        this.dataService.updateTask(result.id, {...result})
+        :
+        this.dataService.addTask({completed: false, created: new Date(), ...result});
       this.refreshTodos();
+      this.task = '';
     });
   }
 }

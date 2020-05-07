@@ -26,17 +26,15 @@ export class NewTaskDialogComponent {
   }
 
   onNoClick(): void {
-    this.data.task = '';
-    this.data.priority = '';
     this.dialogRef.close();
   }
 
-  priorityColor(priority: string, atr: boolean): IBackgound | IColor {
-    return this.sharedService.priorityToColor(priority, atr);
+  priorityColor(priority: string, atr: boolean, completed: boolean): IBackgound | IColor {
+    return this.sharedService.priorityToColor(priority, atr, completed);
   }
 
-  changePriority(priority: string, atr: boolean) {
-    this.color = this.priorityColor(priority, atr);
+  changePriority(priority: string, atr: boolean, completed: boolean) {
+    this.color = this.priorityColor(priority, atr, completed);
     this.data.priority = priority;
   }
 
