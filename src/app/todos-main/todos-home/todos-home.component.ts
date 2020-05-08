@@ -13,6 +13,7 @@ import {IBackgound, IColor} from '../../interfaces/ipriority';
 })
 export class TodosHomeComponent implements OnInit {
   todos: ITodos[];
+  filteredTodos: ITodos[];
   completedTodos: ITodos[];
   isCompleted = false;
   isCurrent: boolean;
@@ -29,8 +30,10 @@ export class TodosHomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dataService.isCurrent$.subscribe(isCurrent => this.isCurrent = isCurrent);
     this.refreshTodos();
+    this.dataService.isCurrent$.subscribe(isCurrent => this.isCurrent = isCurrent);
+    this.dataService.todos$.subscribe(todos => this.todos = todos);
+    this.dataService.filteredTodos$.subscribe(filteredTodos => this.filteredTodos = filteredTodos);
   }
 
   listTitle(): string {
@@ -60,7 +63,11 @@ export class TodosHomeComponent implements OnInit {
   }
 
   refreshTodos(): void {
-    this.dataService.getTodos().subscribe(tasks => this.todos = tasks.filter(task => !task.completed));
+    this.dataService.getTodos().subscribe(tasks => {
+      this.todos = tasks.filter(task => !task.completed);
+      this.dataService.setTodos(this.todos);
+      this.dataService.setFilteredTodos(this.todos);
+    });
     this.dataService.getTodos().subscribe(tasks => this.completedTodos = tasks.filter(task => task.completed));
   }
 

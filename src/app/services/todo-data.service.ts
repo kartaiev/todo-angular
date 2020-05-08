@@ -4,6 +4,7 @@ import {BehaviorSubject, from, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {AngularFirestore} from '@angular/fire/firestore';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -12,12 +13,26 @@ export class TodoDataService {
   private isCurrent = new BehaviorSubject<boolean>(true);
   isCurrent$ = this.isCurrent.asObservable();
 
+  private todos = new BehaviorSubject<ITodos[]>([]);
+  todos$ = this.todos.asObservable();
+
+  private filteredTodos = new BehaviorSubject<ITodos[]>([]);
+  filteredTodos$ = this.filteredTodos.asObservable();
+
 
   constructor(private db: AngularFirestore) {
   }
 
   setIsCurrent(isCurrent: boolean): void {
     this.isCurrent.next(isCurrent);
+  }
+
+  setTodos(todos: ITodos[]): void {
+    this.todos.next(todos);
+  }
+
+  setFilteredTodos(filteredTodos: ITodos[]): void {
+    this.filteredTodos.next(filteredTodos);
   }
 
 

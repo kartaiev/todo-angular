@@ -29,7 +29,9 @@
         </mat-panel-title>
       </mat-expansion-panel-header>
       <mat-list>
-        <mat-list-item *ngFor="let fltr of filters">
+        <mat-list-item
+          *ngFor="let fltr of filters"
+          (click)="toPriority(fltr)">
             <span [ngStyle]="priorityColor(fltr, true, true)" class="priority"></span>
             {{fltr}}
             <mat-divider></mat-divider>

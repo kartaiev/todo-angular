@@ -1,7 +1,7 @@
 <mat-list>
   <h2>{{listTitle()}}</h2>
   <mat-divider></mat-divider>
-  <mat-list-item *ngFor="let task of isCurrent ? todos : completedTodos">
+  <mat-list-item *ngFor="let task of isCurrent ? filteredTodos : completedTodos">
     <div class="left">
       <div
         [ngStyle]="priorityColor(task.priority, true, isCurrent)"
