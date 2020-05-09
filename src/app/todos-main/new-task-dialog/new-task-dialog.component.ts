@@ -39,7 +39,7 @@ export class NewTaskDialogComponent {
   }
 
   setDeadline(): void {
-    console.log(this.data.id);
     this.data.deadline = new Date(this.serializedDate.value);
+    console.log(new Date().getMonth(), new Date().getDate());
   }
 }

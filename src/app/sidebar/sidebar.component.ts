@@ -28,6 +28,11 @@ export class SidebarComponent implements OnInit {
     console.log(this.todos);
   }
 
+  toInbox() {
+    this.dataService.setFilteredTodos(this.todos);
+    this.dataService.setIsCurrent(true);
+  }
+
   toCompleted() {
     this.dataService.setIsCurrent(false);
 
@@ -39,8 +44,14 @@ export class SidebarComponent implements OnInit {
     this.dataService.setFilteredTodos(this.filteredTodos);
   }
 
-  toInbox() {
+  toToday() {
     this.dataService.setFilteredTodos(this.todos);
-    this.dataService.setIsCurrent(true);
+    // @ts-ignore
+    this.filteredTodos = this.todos.filter(todo =>
+      new Date(todo.deadline.seconds * 1000).getDate() === new Date().getDate()
+      &&
+      new Date(todo.deadline.seconds * 1000).getMonth() === new Date().getMonth()
+    );
+    this.dataService.setFilteredTodos(this.filteredTodos);
   }
 }
