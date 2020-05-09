@@ -8,6 +8,13 @@
     <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
   </button>
   <span>TODO-ZEN</span>
+  <p class="search">
+    <mat-form-field appearance="outline" color="accent">
+      <mat-label>search</mat-label>
+      <input matInput placeholder="search" [(ngModel)]="search" (ngModelChange)="toSearchResults(search)">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </p>
 </mat-toolbar>
 
 <mat-sidenav-container>

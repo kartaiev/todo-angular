@@ -15,4 +15,34 @@ mat-sidenav {
   margin: 0 30px 0 30px;
 }
 
+span {
+  margin-right: 40px;
+}
+
+.search {
+  font-size: 14px;
+  margin-top: 32px;
+}
+
+/*::ng-deep .mat-form-field-flex > .mat-form-field-infix {*/
+/*  padding: 0.4em 0 !important;*/
+/*}*/
+/*::ng-deep .mat-form-field-label-wrapper {*/
+/*  top: -1.5em;*/
+/*}*/
+
+/*::ng-deep .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {*/
+/*  transform: translateY(-1.1em) scale(.8);*/
+/*  width: 133.33333%;*/
+/*}*/
+
+/*.example-form {*/
+/*  min-width: 150px;*/
+/*  max-width: 500px;*/
+/*  width: 100%;*/
+/*}*/
+
+/*.example-full-width {*/
+/*  width: 100%;*/
+/*}*/
 
