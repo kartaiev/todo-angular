@@ -19,7 +19,7 @@ export class TodosHomeComponent implements OnInit {
   isCompleted = false;
   isCurrent: boolean;
   private task: string;
-  private deadline: Date;
+  private deadline: IDate;
   private priority: string;
   private id: number;
 

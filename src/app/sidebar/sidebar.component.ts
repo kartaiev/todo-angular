@@ -4,7 +4,6 @@ import {SharedService} from '../services/shared.service';
 import {IBackground, IColor} from '../interfaces/ipriority';
 import {TodoDataService} from '../services/todo-data.service';
 import {ITodos} from '../interfaces/itodos';
-import {log} from 'util';
 
 @Component({
   selector: 'app-sidebar',
@@ -49,10 +48,10 @@ export class SidebarComponent implements OnInit {
     this.dataService.setFilteredTodos(this.todos);
     this.dataService.setIsCurrent(true);
     this.filteredTodos = this.todos.filter(todo => {
-      const deadline = todo.deadline;
-      return new Date(deadline.seconds * 1000).getDate() === new Date().getDate()
+        const {seconds} = todo.deadline;
+        return new Date(seconds * 1000).getDate() === new Date().getDate()
           &&
-          new Date(deadline.seconds * 1000).getMonth() === new Date().getMonth();
+          new Date(seconds * 1000).getMonth() === new Date().getMonth();
       }
     );
     this.dataService.setFilteredTodos(this.filteredTodos);

@@ -5,6 +5,6 @@ export interface ITodos {
   task: string;
   completed: boolean;
   created: Date;
-  deadline: Date;
+  deadline: IDate;
   priority: string;
 }
