@@ -1,15 +1,23 @@
 import { Injectable } from '@angular/core';
 import {Priority} from '../dictionary';
-import {IBackgound, IColor} from '../interfaces/ipriority';
+import {IBackground, IColor} from '../interfaces/ipriority';
+import {BehaviorSubject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SharedService {
 
+  private isOpen = new BehaviorSubject<boolean>(true);
+  isOpen$ = this.isOpen.asObservable();
+
   constructor() { }
 
-  priorityToColor(priority: string, atr: boolean, completed: boolean): IBackgound | IColor {
+  setIsOpen(isOpen: boolean): void {
+    this.isOpen.next(isOpen);
+  }
+
+  priorityToColor(priority: string, atr: boolean, completed: boolean): IBackground | IColor {
     if (!completed) {
       return {background: 'lightgrey'};
     } else {

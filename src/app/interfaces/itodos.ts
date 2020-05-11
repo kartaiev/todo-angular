@@ -1,3 +1,5 @@
+import {IDate} from './idate';
+
 export interface ITodos {
   id: number;
   task: string;

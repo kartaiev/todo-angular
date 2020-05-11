@@ -1,9 +1,9 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {ITodos} from '../../itodos';
+import {ITodos} from '../../interfaces/itodos';
 import {SharedService} from '../../services/shared.service';
 import {Priority} from '../../dictionary';
-import {IBackgound, IColor} from '../../interfaces/ipriority';
+import {IBackground, IColor} from '../../interfaces/ipriority';
 import {FormControl} from '@angular/forms';
 
 
@@ -29,7 +29,7 @@ export class NewTaskDialogComponent {
     this.dialogRef.close();
   }
 
-  priorityColor(priority: string, atr: boolean, completed: boolean): IBackgound | IColor {
+  priorityColor(priority: string, atr: boolean, completed: boolean): IBackground | IColor {
     return this.sharedService.priorityToColor(priority, atr, completed);
   }
 
@@ -39,7 +39,6 @@ export class NewTaskDialogComponent {
   }
 
   setDeadline(): void {
-    this.data.deadline = new Date(this.serializedDate.value);
-    console.log(new Date().getMonth(), new Date().getDate());
+    this.data.deadline = this.serializedDate.value;
   }
 }

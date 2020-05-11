@@ -1,4 +1,4 @@
-export interface IBackgound {
+export interface IBackground {
   background: string;
 }
 

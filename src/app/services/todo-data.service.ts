@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {ITodos} from '../itodos';
+import {ITodos} from '../interfaces/itodos';
 import {BehaviorSubject, from, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {AngularFirestore} from '@angular/fire/firestore';

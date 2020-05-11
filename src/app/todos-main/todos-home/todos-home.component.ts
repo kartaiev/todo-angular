@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {ITodos} from '../../itodos';
+import {ITodos} from '../../interfaces/itodos';
 import {TodoDataService} from '../../services/todo-data.service';
 import {SharedService} from '../../services/shared.service';
 import {MatDialog} from '@angular/material/dialog';
 import {NewTaskDialogComponent} from '../new-task-dialog/new-task-dialog.component';
-import {IBackgound, IColor} from '../../interfaces/ipriority';
+import {IBackground, IColor} from '../../interfaces/ipriority';
+import {IDate} from '../../interfaces/idate';
 
 @Component({
   selector: 'app-todos-home',
@@ -45,7 +46,7 @@ export class TodosHomeComponent implements OnInit {
   }
 
 
-  priorityColor(priority: string, atr: boolean, completed: boolean): IBackgound | IColor {
+  priorityColor(priority: string, atr: boolean, completed: boolean): IBackground | IColor {
     return this.sharedService.priorityToColor(priority, atr, completed);
   }
 

@@ -1,24 +1,7 @@
-<mat-toolbar class="mat-elevation-z15" color="primary">
-  <button
-    class="hamburger"
-    (click)="sidenavToggle()"
-    aria-label="Toggle sidenav"
-    mat-icon-button
-    type="button">
-    <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-  </button>
-  <span>TODO-ZEN</span>
-  <p class="search">
-    <mat-form-field appearance="outline" color="accent">
-      <mat-label>search</mat-label>
-      <input matInput placeholder="search" [(ngModel)]="search" (ngModelChange)="toSearchResults(search)">
-      <mat-icon matSuffix>search</mat-icon>
-    </mat-form-field>
-  </p>
-</mat-toolbar>
+<app-navbar></app-navbar>
 
 <mat-sidenav-container>
-  <mat-sidenav [(opened)]="opened" class="mat-elevation-z1" mode="side">
+  <mat-sidenav [(opened)]="isOpened" class="mat-elevation-z1" mode="side">
     <app-sidebar></app-sidebar>
   </mat-sidenav>
   <mat-sidenav-content>

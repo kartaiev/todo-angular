@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {TodoDataService} from './services/todo-data.service';
-import {ITodos} from './itodos';
+import {ITodos} from './interfaces/itodos';
+import {SharedService} from './services/shared.service';
 
 
 @Component({
@@ -9,34 +10,20 @@ import {ITodos} from './itodos';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  opened = true;
-  search = '';
+  isOpened: boolean;
   todos: ITodos[];
   filteredTodos: ITodos[];
 
   constructor(
     private dataService: TodoDataService,
+    private sharedService: SharedService
   ) {
   }
-
 
   ngOnInit() {
     this.dataService.todos$.subscribe(todos => this.todos = todos);
     this.dataService.filteredTodos$.subscribe(filteredTodos => this.filteredTodos = filteredTodos);
+    this.sharedService.isOpen$.subscribe(isOpen => this.isOpened = isOpen);
   }
-
-  toSearchResults(result): void {
-    if (this.search === '') {
-      this.dataService.setFilteredTodos(this.todos);
-    } else {
-      const search = this.filteredTodos.filter(todo => todo.task.includes(result));
-      this.dataService.setFilteredTodos(search);
-    }
-  }
-
-  sidenavToggle() {
-    this.opened = !this.opened;
-  }
-
 
 }
