@@ -11,10 +11,17 @@ export class SharedService {
   private isOpen = new BehaviorSubject<boolean>(true);
   isOpen$ = this.isOpen.asObservable();
 
+  private url = new BehaviorSubject<string>('/');
+  url$ = this.url.asObservable();
+
   constructor() { }
 
   setIsOpen(isOpen: boolean): void {
     this.isOpen.next(isOpen);
+  }
+
+  setUrl(url: string): void {
+    this.url.next(url);
   }
 
   priorityToColor(priority: string, atr: boolean, completed: boolean): IBackground | IColor {

@@ -1,13 +1,6 @@
-<app-navbar></app-navbar>
+<div class="container">
+  <app-navbar></app-navbar>
+  <router-outlet></router-outlet>
+</div>
 
-<mat-sidenav-container>
-  <mat-sidenav [(opened)]="isOpened" class="mat-elevation-z1" mode="side">
-    <app-sidebar></app-sidebar>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <app-todos-home></app-todos-home>
-  </mat-sidenav-content>
-
-
-</mat-sidenav-container>
 

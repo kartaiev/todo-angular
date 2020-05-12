@@ -22,7 +22,7 @@
       <mat-expansion-panel-header>
         <mat-panel-title>
           <button class="priority-btn"
-            mat-icon-button>
+                  mat-icon-button>
             <mat-icon>flag</mat-icon>
             <span class="priority-header">Priority</span>
           </button>
@@ -32,9 +32,9 @@
         <mat-list-item
           *ngFor="let fltr of filters"
           (click)="toPriority(fltr)">
-            <span [ngStyle]="priorityColor(fltr, true, true)" class="priority"></span>
-            {{fltr}}
-            <mat-divider></mat-divider>
+          <span [ngStyle]="priorityColor(fltr, true, true)" class="priority"></span>
+          {{fltr}}
+          <mat-divider></mat-divider>
         </mat-list-item>
       </mat-list>
     </mat-expansion-panel>
@@ -48,3 +48,4 @@
     Completed
   </mat-list-item>
 </mat-list>
+

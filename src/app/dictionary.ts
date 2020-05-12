@@ -3,3 +3,9 @@ export const Priority = {
   MEDIUM: 'medium',
   LOW: 'low',
 };
+
+export const URLs = {
+  HOME: '',
+  LOGIN: 'login',
+  REGISTER: 'register'
+};

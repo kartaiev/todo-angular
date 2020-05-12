@@ -1,19 +1,17 @@
-import {Component, Inject} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
+import {IBackground, IColor} from '../../interfaces/ipriority';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {ITodos} from '../../interfaces/itodos';
 import {SharedService} from '../../services/shared.service';
-import {Priority} from '../../dictionary';
-import {IBackground, IColor} from '../../interfaces/ipriority';
 import {FormControl} from '@angular/forms';
-
+import {Priority} from '../../dictionary';
 
 @Component({
   selector: 'app-new-task-dialog',
   templateUrl: './new-task-dialog.component.html',
-  styleUrls: ['./new-task-dialog.component.css'],
+  styleUrls: ['./new-task-dialog.component.scss']
 })
-
-export class NewTaskDialogComponent {
+export class NewTaskDialogComponent implements OnInit {
   priorities = [Priority.HIGH, Priority.MEDIUM, Priority.LOW];
   color: object;
   date = new FormControl(new Date());
@@ -40,5 +38,8 @@ export class NewTaskDialogComponent {
 
   setDeadline(): void {
     this.data.deadline = this.serializedDate.value;
+  }
+
+  ngOnInit(): void {
   }
 }

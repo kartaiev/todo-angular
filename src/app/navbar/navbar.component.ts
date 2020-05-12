@@ -13,6 +13,7 @@ export class NavbarComponent implements OnInit {
   filteredTodos: ITodos[];
   todos: ITodos[];
   search: string;
+  url: string;
 
   constructor(private sharedService: SharedService, private  dataService: TodoDataService) {
   }
@@ -21,6 +22,7 @@ export class NavbarComponent implements OnInit {
     this.dataService.todos$.subscribe(todos => this.todos = todos);
     this.dataService.filteredTodos$.subscribe(filteredTodos => this.filteredTodos = filteredTodos);
     this.sharedService.isOpen$.subscribe(isOpen => this.isOpen = isOpen);
+    this.sharedService.url$.subscribe(url => this.url = url);
   }
 
   sideNavToggle() {

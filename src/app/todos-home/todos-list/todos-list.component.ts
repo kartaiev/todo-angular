@@ -1,18 +1,18 @@
-import {Component, OnInit} from '@angular/core';
-import {ITodos} from '../../interfaces/itodos';
-import {TodoDataService} from '../../services/todo-data.service';
-import {SharedService} from '../../services/shared.service';
-import {MatDialog} from '@angular/material/dialog';
+import { Component, OnInit } from '@angular/core';
 import {NewTaskDialogComponent} from '../new-task-dialog/new-task-dialog.component';
-import {IBackground, IColor} from '../../interfaces/ipriority';
+import {ITodos} from '../../interfaces/itodos';
+import {MatDialog} from '@angular/material/dialog';
+import {SharedService} from '../../services/shared.service';
+import {TodoDataService} from '../../services/todo-data.service';
 import {IDate} from '../../interfaces/idate';
+import {IBackground, IColor} from '../../interfaces/ipriority';
 
 @Component({
-  selector: 'app-todos-home',
-  templateUrl: './todos-home.component.html',
-  styleUrls: ['./todos-home.component.css']
+  selector: 'app-todos-list',
+  templateUrl: './todos-list.component.html',
+  styleUrls: ['./todos-list.component.scss']
 })
-export class TodosHomeComponent implements OnInit {
+export class TodosListComponent implements OnInit {
   todos: ITodos[];
   filteredTodos: ITodos[];
   completedTodos: ITodos[];
@@ -105,6 +105,3 @@ export class TodosHomeComponent implements OnInit {
     });
   }
 }
-
-
-

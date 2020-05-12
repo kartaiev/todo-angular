@@ -1,14 +1,14 @@
-import {Component, OnInit} from '@angular/core';
-import {Priority} from '../dictionary';
-import {SharedService} from '../services/shared.service';
-import {IBackground, IColor} from '../interfaces/ipriority';
-import {TodoDataService} from '../services/todo-data.service';
-import {ITodos} from '../interfaces/itodos';
+import { Component, OnInit } from '@angular/core';
+import {Priority} from '../../dictionary';
+import {ITodos} from '../../interfaces/itodos';
+import {TodoDataService} from '../../services/todo-data.service';
+import {SharedService} from '../../services/shared.service';
+import {IBackground, IColor} from '../../interfaces/ipriority';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.css']
+  styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
   filters = [Priority.HIGH, Priority.MEDIUM, Priority.LOW];
