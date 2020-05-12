@@ -1,0 +1,29 @@
+mat-list {
+  padding: 1.5vh 5%;
+}
+
+mat-list-item {
+  font-weight: lighter;
+  cursor: pointer;
+}
+
+mat-list-item:hover {
+  color: #69F1AE;
+}
+
+.priority-btn:hover {
+  color: #69F1AE;
+}
+
+.priority-header {
+  font-weight: lighter;
+  margin-left: 10px;
+  font-size: 1rem;
+}
+
+.priority {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
