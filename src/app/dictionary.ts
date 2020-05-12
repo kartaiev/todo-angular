@@ -5,7 +5,7 @@ export const Priority = {
 };
 
 export const URLs = {
-  HOME: '',
+  HOME: '/',
   LOGIN: 'login',
   REGISTER: 'register'
 };

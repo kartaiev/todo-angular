@@ -15,6 +15,7 @@ export class AppComponent implements OnInit {
         if (!(event instanceof RouterEvent) || event.url) {
           if (event instanceof RouterEvent) {
             this.sharedService.setUrl(event.url);
+            console.log(event.url);
           }
         }
       });

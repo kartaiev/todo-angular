@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {SharedService} from '../services/shared.service';
 import {TodoDataService} from '../services/todo-data.service';
 import {ITodos} from '../interfaces/itodos';
+import {URLs} from '../dictionary';
 
 @Component({
   selector: 'app-navbar',
@@ -27,6 +28,10 @@ export class NavbarComponent implements OnInit {
 
   sideNavToggle() {
     this.sharedService.setIsOpen(!this.isOpen);
+  }
+
+  color() {
+    return this.url === URLs.HOME ? {color: '#fffff'} : {color: '#7E249C'};
   }
 
   toSearchResults(result): void {

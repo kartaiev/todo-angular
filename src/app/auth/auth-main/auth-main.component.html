@@ -1,1 +1,35 @@
-<p>auth-main works!</p>
+<div class="container">
+  <div class="title">
+    <h1>{{url === '/login' ? 'Sign In' : 'Sign Up'}}</h1>
+    <div class="icons">
+      <fa-icon [icon]="google"></fa-icon>
+      <fa-icon [icon]="facebook"></fa-icon>
+    </div>
+  </div>
+
+
+  <mat-form-field *ngIf="url === '/login'" appearance="outline" color="accent">
+    <mat-label>Enter your name</mat-label>
+    <input class="example-right-align" matInput type="text">
+    <mat-icon matSuffix>perm_identity</mat-icon>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" color="accent">
+    <mat-label>Enter your email</mat-label>
+    <input class="example-right-align" matInput type="email">
+    <mat-icon matSuffix>email</mat-icon>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" color="accent">
+    <mat-label>Enter your password</mat-label>
+    <mat-icon (click)="hide = !hide" class="pass" matSuffix>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+    <input [type]="hide ? 'password' : 'text'" matInput>
+  </mat-form-field>
+
+  <mat-form-field *ngIf="url === '/login'" appearance="outline" color="accent">
+    <mat-label>Repeat password</mat-label>
+    <mat-icon (click)="hide = !hide" class="pass" matSuffix>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+    <input [type]="hide ? 'password' : 'text'" matInput>
+  </mat-form-field>
+
+</div>

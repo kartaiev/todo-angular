@@ -1,11 +1,13 @@
 <mat-toolbar class="mat-elevation-z15" color="primary">
+  <div class="left">
   <button
+    [ngStyle]="url !== '/' && {cursor: 'default'}"
     class="hamburger"
     (click)="sideNavToggle()"
     aria-label="Toggle sidenav"
     mat-icon-button
     type="button">
-    <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+    <mat-icon [style]="color()" aria-label="Side nav toggle icon">menu</mat-icon>
   </button>
   <span>TODO-DAO</span>
   <div *ngIf="url === '/'" class="search">
@@ -15,4 +17,9 @@
       <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
   </div>
+  </div>
+  <ul *ngIf="url !== '/'">
+    <li><a routerLink="/login" routerLinkActive="active">Login</a></li>
+    <li><a routerLink="/register" routerLinkActive="active">Register</a></li>
+  </ul>
 </mat-toolbar>
