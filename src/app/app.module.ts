@@ -17,6 +17,7 @@ import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {TodosHomeModule} from './todos-home/todos-home.module';
 import {AuthModule} from './auth/auth.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {AngularFireAuthModule} from '@angular/fire/auth';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
+    AngularFireAuthModule,
     TodosHomeModule,
     AuthModule,
     FontAwesomeModule

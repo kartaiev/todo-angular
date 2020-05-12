@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Event, Router, RouterEvent} from '@angular/router';
 import {SharedService} from './services/shared.service';
+import {AuthService} from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,11 @@ import {SharedService} from './services/shared.service';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private router: Router, private sharedService: SharedService) {
+  constructor(
+    private router: Router,
+    private sharedService: SharedService,
+    private authService: AuthService
+  ) {
     router.events
       .subscribe((event: Event) => {
         if (!(event instanceof RouterEvent) || event.url) {
@@ -19,6 +24,7 @@ export class AppComponent implements OnInit {
           }
         }
       });
+    authService.userData.subscribe(data => console.log(data.uid));
   }
 
   ngOnInit(): void {

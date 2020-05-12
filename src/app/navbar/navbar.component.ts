@@ -3,6 +3,7 @@ import {SharedService} from '../services/shared.service';
 import {TodoDataService} from '../services/todo-data.service';
 import {ITodos} from '../interfaces/itodos';
 import {URLs} from '../dictionary';
+import {AuthService} from '../services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -16,7 +17,11 @@ export class NavbarComponent implements OnInit {
   search: string;
   url: string;
 
-  constructor(private sharedService: SharedService, private  dataService: TodoDataService) {
+  constructor(
+    private sharedService: SharedService,
+    private  dataService: TodoDataService,
+    private authService: AuthService
+  ) {
   }
 
   ngOnInit(): void {
@@ -41,6 +46,10 @@ export class NavbarComponent implements OnInit {
       const search = this.filteredTodos.filter(todo => todo.task.includes(result));
       this.dataService.setFilteredTodos(search);
     }
+  }
+
+  signOut() {
+    this.authService.SignOut();
   }
 
 }
