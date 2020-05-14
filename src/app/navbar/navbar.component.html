@@ -1,28 +1,34 @@
-<mat-toolbar class="mat-elevation-z15" color="primary">
+<mat-toolbar class="mat-elevation-z5" color="primary">
   <div class="left">
-  <button
-    [ngStyle]="url !== '/' && {cursor: 'default'}"
-    class="hamburger"
-    (click)="sideNavToggle()"
-    aria-label="Toggle sidenav"
-    mat-icon-button
-    type="button">
-    <mat-icon [style]="color()" aria-label="Side nav toggle icon">menu</mat-icon>
-  </button>
-  <span>TODO-DAO</span>
-  <div *ngIf="url === '/'" class="search">
-    <mat-form-field appearance="outline" color="accent">
-      <mat-label>search</mat-label>
-      <input matInput placeholder="search" [(ngModel)]="search" (ngModelChange)="toSearchResults(search)">
-      <mat-icon matSuffix>search</mat-icon>
-    </mat-form-field>
+    <button
+      (click)="sideNavToggle()"
+      [ngStyle]="url !== '/home' && {cursor: 'default'}"
+      aria-label="Toggle sidenav"
+      class="hamburger"
+      mat-icon-button
+      type="button">
+      <mat-icon
+        [ngStyle]="url === '/home'
+        ? {color: 'white'}
+        : {color: '#7E249C'}"
+        aria-label="Side nav toggle icon">
+        menu
+      </mat-icon>
+    </button>
+    <span>TODO-DAO</span>
+    <div *ngIf="url === '/home'" class="search">
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>search</mat-label>
+        <input (ngModelChange)="toSearchResults(search)" [(ngModel)]="search" matInput placeholder="search">
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </div>
   </div>
-  </div>
-  <ul *ngIf="url !== '/'">
+  <ul *ngIf="url !== '/home'">
     <li><a routerLink="/login" routerLinkActive="active">Login</a></li>
     <li><a routerLink="/register" routerLinkActive="active">Register</a></li>
   </ul>
-  <ul *ngIf="url === '/'">
+  <ul *ngIf="url === '/home'">
     <li></li>
     <li (click)="signOut()"><a routerLink="/register" routerLinkActive="active">Sign Out</a></li>
   </ul>

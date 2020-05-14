@@ -8,6 +8,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {FormsModule} from '@angular/forms';
+import {AngularFireAuthGuardModule} from '@angular/fire/auth-guard';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import {FormsModule} from '@angular/forms';
     MatButtonModule,
     MatIconModule,
     FontAwesomeModule,
-    FormsModule
+    FormsModule,
+    AngularFireAuthGuardModule
   ]
 })
 export class AuthModule { }

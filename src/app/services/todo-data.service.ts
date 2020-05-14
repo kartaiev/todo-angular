@@ -36,8 +36,8 @@ export class TodoDataService {
   }
 
 
-  getTodos(): Observable<ITodos[]> {
-    return this.db.collection<ITodos>('tasks').snapshotChanges().pipe(
+  getTodos(uid): Observable<ITodos[]> {
+    return this.db.collection<ITodos>('tasks', ref => ref.where('uid', '==', uid)).snapshotChanges().pipe(
       map(snaps => {
         return snaps.map(snap => {
           return {
@@ -48,6 +48,7 @@ export class TodoDataService {
       })
     );
   }
+
 
   addTask(obj: ITodos): void {
     if (obj.task) {

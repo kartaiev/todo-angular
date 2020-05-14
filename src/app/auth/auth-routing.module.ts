@@ -3,14 +3,15 @@ import { Routes, RouterModule } from '@angular/router';
 import {AuthMainComponent} from './auth-main/auth-main.component';
 
 
+
 const routes: Routes = [
   {
     path: 'login',
-    component: AuthMainComponent
+    component: AuthMainComponent,
   },
   {
     path: 'register',
-    component: AuthMainComponent
+    component: AuthMainComponent,
   }
 ];
 

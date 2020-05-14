@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NewTaskDialogComponent} from '../new-task-dialog/new-task-dialog.component';
 import {ITodos} from '../../interfaces/itodos';
 import {MatDialog} from '@angular/material/dialog';
@@ -6,6 +6,8 @@ import {SharedService} from '../../services/shared.service';
 import {TodoDataService} from '../../services/todo-data.service';
 import {IDate} from '../../interfaces/idate';
 import {IBackground, IColor} from '../../interfaces/ipriority';
+import {AuthService} from '../../services/auth.service';
+import {log} from 'util';
 
 @Component({
   selector: 'app-todos-list',
@@ -18,6 +20,7 @@ export class TodosListComponent implements OnInit {
   completedTodos: ITodos[];
   isCompleted = false;
   isCurrent: boolean;
+  uid: string;
   private task: string;
   private deadline: IDate;
   private priority: string;
@@ -26,6 +29,7 @@ export class TodosListComponent implements OnInit {
   constructor(
     private dataService: TodoDataService,
     private sharedService: SharedService,
+    private authService: AuthService,
     public dialog: MatDialog
   ) {
   }
@@ -45,7 +49,6 @@ export class TodosListComponent implements OnInit {
     }
   }
 
-
   priorityColor(priority: string, atr: boolean, completed: boolean): IBackground | IColor {
     return this.sharedService.priorityToColor(priority, atr, completed);
   }
@@ -64,12 +67,17 @@ export class TodosListComponent implements OnInit {
   }
 
   refreshTodos(): void {
-    this.dataService.getTodos().subscribe(tasks => {
-      this.todos = tasks.filter(task => !task.completed);
-      this.dataService.setTodos(this.todos);
-      this.dataService.setFilteredTodos(this.todos);
-    });
-    this.dataService.getTodos().subscribe(tasks => this.completedTodos = tasks.filter(task => task.completed));
+      this.authService.userData.subscribe(data => {
+        this.dataService.getTodos(data.uid).subscribe(tasks => {
+          this.todos = tasks.filter(task => !task.completed);
+          this.dataService.setTodos(this.todos);
+          this.dataService.setFilteredTodos(this.todos);
+        });
+        this.dataService.getTodos(data.uid)
+          .subscribe(tasks => this.completedTodos = tasks
+            .filter(task => task.completed));
+        this.uid = data.uid;
+      });
   }
 
   openToUpdate(id): void {
@@ -99,7 +107,7 @@ export class TodosListComponent implements OnInit {
         ?
         this.dataService.updateTask(result.id, {...result})
         :
-        this.dataService.addTask({completed: false, created: new Date(), ...result});
+        this.dataService.addTask({uid: this.uid, completed: false, created: new Date(), ...result});
       this.refreshTodos();
       this.task = '';
     });

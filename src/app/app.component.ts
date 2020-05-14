@@ -9,11 +9,11 @@ import {AuthService} from './services/auth.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
+  title = 'todo';
 
   constructor(
     private router: Router,
     private sharedService: SharedService,
-    private authService: AuthService
   ) {
     router.events
       .subscribe((event: Event) => {
@@ -24,7 +24,6 @@ export class AppComponent implements OnInit {
           }
         }
       });
-    authService.userData.subscribe(data => console.log(data.uid));
   }
 
   ngOnInit(): void {

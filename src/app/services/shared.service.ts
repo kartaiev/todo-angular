@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Priority} from '../dictionary';
 import {IBackground, IColor} from '../interfaces/ipriority';
 import {BehaviorSubject} from 'rxjs';
@@ -14,11 +14,13 @@ export class SharedService {
   private url = new BehaviorSubject<string>('/');
   url$ = this.url.asObservable();
 
-  constructor() { }
+  constructor() {
+  }
 
   setIsOpen(isOpen: boolean): void {
     this.isOpen.next(isOpen);
   }
+
 
   setUrl(url: string): void {
     this.url.next(url);

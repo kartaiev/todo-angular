@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { Observable } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {AngularFireAuth} from '@angular/fire/auth';
+import {BehaviorSubject, Observable} from 'rxjs';
 import * as firebase from 'firebase';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,13 @@ import * as firebase from 'firebase';
 export class AuthService {
   userData: Observable<firebase.User>;
 
-  constructor(private fireAuth: AngularFireAuth) {
+  private isLogged = new BehaviorSubject<boolean>(false);
+  isLogged$ = this.isLogged.asObservable();
+
+  private uid = new BehaviorSubject<string>('');
+  uid$ = this.uid.asObservable();
+
+  constructor(private fireAuth: AngularFireAuth, private router: Router) {
     this.userData = fireAuth.authState;
   }
 
@@ -36,8 +43,15 @@ export class AuthService {
   }
 
   SignOut() {
-    this.fireAuth
-      .signOut().then(res => console.log('Signed out', res));
+    this.fireAuth.signOut().then(() => {
+        this.router.navigateByUrl('/login')
+          .then(r => console.log('logged out', r));
+      });
+    this.setIsLogged(false);
+  }
+
+  setIsLogged(isLogged: boolean): void {
+    this.isLogged.next(isLogged);
   }
 
 }

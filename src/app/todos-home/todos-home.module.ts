@@ -18,6 +18,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
+import {MatNativeDateModule} from '@angular/material/core';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import {MatInputModule} from '@angular/material/input';
     ReactiveFormsModule,
     MatDatepickerModule,
     MatDialogModule,
-    MatInputModule
+    MatInputModule,
+    MatNativeDateModule
   ]
 })
 export class TodosHomeModule { }
