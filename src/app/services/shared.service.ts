@@ -14,6 +14,9 @@ export class SharedService {
   private url = new BehaviorSubject<string>('/');
   url$ = this.url.asObservable();
 
+  private pageTitle = new BehaviorSubject<string>('/');
+  pageTitle$ = this.pageTitle.asObservable();
+
   constructor() {
   }
 
@@ -24,6 +27,10 @@ export class SharedService {
 
   setUrl(url: string): void {
     this.url.next(url);
+  }
+
+  setPageTitle(pageTitle: string): void {
+    this.pageTitle.next(pageTitle);
   }
 
   priorityToColor(priority: string, atr: boolean, completed: boolean): IBackground | IColor {

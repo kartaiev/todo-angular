@@ -8,6 +8,7 @@ import {IDate} from '../../interfaces/idate';
 import {IBackground, IColor} from '../../interfaces/ipriority';
 import {AuthService} from '../../services/auth.service';
 import {Subscription} from 'rxjs';
+import {PageTitles} from "../../dictionary";
 
 
 @Component({
@@ -22,6 +23,7 @@ export class TodosListComponent implements OnInit, OnDestroy {
   isCompleted = false;
   isCurrent: boolean;
   uid: string;
+  pageTitle: string;
   private task: string;
   private deadline: IDate;
   private priority: string;
@@ -41,6 +43,8 @@ export class TodosListComponent implements OnInit, OnDestroy {
     this.dataService.isCurrent$.subscribe(isCurrent => this.isCurrent = isCurrent);
     this.dataService.todos$.subscribe(todos => this.todos = todos);
     this.dataService.filteredTodos$.subscribe(filteredTodos => this.filteredTodos = filteredTodos);
+    this.sharedService.pageTitle$.subscribe(pageTitle => this.pageTitle = pageTitle);
+    this.pageTitle = PageTitles.INBOX;
   }
 
   listTitle(): string {

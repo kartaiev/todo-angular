@@ -9,3 +9,10 @@ export const URLs = {
   LOGIN: '/login',
   REGISTER: '/register'
 };
+
+export const PageTitles = {
+  INBOX: 'Inbox',
+  TODAY: 'Today',
+  PRIORITY: 'Priority',
+  COMPLETED: 'Completed'
+};

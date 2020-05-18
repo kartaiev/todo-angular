@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Priority} from '../../dictionary';
+import {PageTitles, Priority} from '../../dictionary';
 import {ITodos} from '../../interfaces/itodos';
 import {TodoDataService} from '../../services/todo-data.service';
 import {SharedService} from '../../services/shared.service';
@@ -31,17 +31,19 @@ export class SidebarComponent implements OnInit {
   toInbox() {
     this.dataService.setFilteredTodos(this.todos);
     this.dataService.setIsCurrent(true);
+    this.sharedService.setPageTitle(PageTitles.INBOX);
   }
 
   toCompleted() {
     this.dataService.setIsCurrent(false);
-
+    this.sharedService.setPageTitle(PageTitles.COMPLETED);
   }
 
   toPriority(priority) {
     this.dataService.setFilteredTodos(this.todos);
     this.filteredTodos = this.todos.filter(todo => todo.priority === priority);
     this.dataService.setFilteredTodos(this.filteredTodos);
+    this.sharedService.setPageTitle(PageTitles.PRIORITY);
   }
 
   toToday() {
@@ -55,5 +57,6 @@ export class SidebarComponent implements OnInit {
       }
     );
     this.dataService.setFilteredTodos(this.filteredTodos);
+    this.sharedService.setPageTitle(PageTitles.TODAY);
   }
 }
