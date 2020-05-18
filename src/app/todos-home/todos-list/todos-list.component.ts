@@ -8,7 +8,7 @@ import {IDate} from '../../interfaces/idate';
 import {IBackground, IColor} from '../../interfaces/ipriority';
 import {AuthService} from '../../services/auth.service';
 import {Subscription} from 'rxjs';
-import {PageTitles} from "../../dictionary";
+import {PageTitles} from '../../dictionary';
 
 
 @Component({
