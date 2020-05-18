@@ -13,9 +13,6 @@ export class AuthService {
   private isLogged = new BehaviorSubject<boolean>(false);
   isLogged$ = this.isLogged.asObservable();
 
-  private uid = new BehaviorSubject<string>('');
-  uid$ = this.uid.asObservable();
-
   constructor(private fireAuth: AngularFireAuth, private router: Router) {
     this.userData = fireAuth.authState;
   }

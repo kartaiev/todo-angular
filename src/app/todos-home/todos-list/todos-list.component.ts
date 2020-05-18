@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {NewTaskDialogComponent} from '../new-task-dialog/new-task-dialog.component';
 import {ITodos} from '../../interfaces/itodos';
 import {MatDialog} from '@angular/material/dialog';
@@ -7,14 +7,15 @@ import {TodoDataService} from '../../services/todo-data.service';
 import {IDate} from '../../interfaces/idate';
 import {IBackground, IColor} from '../../interfaces/ipriority';
 import {AuthService} from '../../services/auth.service';
-import {log} from 'util';
+import {Subscription} from 'rxjs';
+
 
 @Component({
   selector: 'app-todos-list',
   templateUrl: './todos-list.component.html',
   styleUrls: ['./todos-list.component.scss']
 })
-export class TodosListComponent implements OnInit {
+export class TodosListComponent implements OnInit, OnDestroy {
   todos: ITodos[];
   filteredTodos: ITodos[];
   completedTodos: ITodos[];
@@ -25,6 +26,7 @@ export class TodosListComponent implements OnInit {
   private deadline: IDate;
   private priority: string;
   private id: number;
+  private subscription: Subscription;
 
   constructor(
     private dataService: TodoDataService,
@@ -67,7 +69,8 @@ export class TodosListComponent implements OnInit {
   }
 
   refreshTodos(): void {
-      this.authService.userData.subscribe(data => {
+    this.subscription = this.authService.userData.subscribe(data => {
+      if (data) {
         this.dataService.getTodos(data.uid).subscribe(tasks => {
           this.todos = tasks.filter(task => !task.completed);
           this.dataService.setTodos(this.todos);
@@ -77,7 +80,8 @@ export class TodosListComponent implements OnInit {
           .subscribe(tasks => this.completedTodos = tasks
             .filter(task => task.completed));
         this.uid = data.uid;
-      });
+      }
+    });
   }
 
   openToUpdate(id): void {
@@ -111,5 +115,9 @@ export class TodosListComponent implements OnInit {
       this.refreshTodos();
       this.task = '';
     });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }
