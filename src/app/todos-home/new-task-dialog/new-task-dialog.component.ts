@@ -41,5 +41,6 @@ export class NewTaskDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.data.deadline = this.date.value;
   }
 }
