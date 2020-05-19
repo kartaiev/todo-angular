@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/auth';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {Observable} from 'rxjs';
 import * as firebase from 'firebase';
 import {Router} from '@angular/router';
 
@@ -10,9 +10,6 @@ import {Router} from '@angular/router';
 export class AuthService {
   userData: Observable<firebase.User>;
 
-  private isLogged = new BehaviorSubject<boolean>(false);
-  isLogged$ = this.isLogged.asObservable();
-
   constructor(private fireAuth: AngularFireAuth, private router: Router) {
     this.userData = fireAuth.authState;
   }
@@ -21,6 +18,7 @@ export class AuthService {
     this.fireAuth
       .createUserWithEmailAndPassword(email, password)
       .then(res => {
+        localStorage.setItem('uid', JSON.stringify(res.user.uid));
         console.log('Successfully signed up!', res);
       })
       .catch(err => {
@@ -28,12 +26,13 @@ export class AuthService {
       });
   }
 
-  facebookSighnIn() {
+  facebookSignIn() {
     return new Promise<any>((resolve, reject) => {
       const provider = new firebase.auth.FacebookAuthProvider();
       this.fireAuth
         .signInWithPopup(provider)
         .then(res => {
+          localStorage.setItem('uid', JSON.stringify(res.user.uid));
           resolve(res);
         }, err => {
           console.log(err);
@@ -50,6 +49,7 @@ export class AuthService {
       this.fireAuth
         .signInWithPopup(provider)
         .then(res => {
+          localStorage.setItem('uid', JSON.stringify(res.user.uid));
           resolve(res);
         });
     });
@@ -60,6 +60,7 @@ export class AuthService {
     this.fireAuth
       .signInWithEmailAndPassword(email, password)
       .then(res => {
+        localStorage.setItem('uid', JSON.stringify(res.user.uid));
         console.log('Successfully signed in!', res);
       })
       .catch(err => {
@@ -69,14 +70,10 @@ export class AuthService {
 
   SignOut() {
     this.fireAuth.signOut().then(() => {
+      localStorage.removeItem('uid');
       this.router.navigateByUrl('/login')
         .then(r => console.log('logged out', r));
     });
-    this.setIsLogged(false);
-  }
-
-  setIsLogged(isLogged: boolean): void {
-    this.isLogged.next(isLogged);
   }
 
 }
