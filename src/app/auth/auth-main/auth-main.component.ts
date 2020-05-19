@@ -45,12 +45,23 @@ export class AuthMainComponent implements OnInit {
   }
 
   facebookSignIn() {
-    this.authService.facebookSighnIn().then(() => console.log('successfully signed in'));
+    this.authService.facebookSighnIn()
+      .then(() => {
+        this.authService.setIsLogged(true);
+        this.router.navigateByUrl('/home')
+          .then(r => console.log('Signed In', r));
+      });
   }
 
   googleSignIn() {
-    this.authService.googleSignIn().then(() => console.log('successfully signed in'));
+    this.authService.googleSignIn()
+      .then(() => {
+        this.authService.setIsLogged(true);
+        this.router.navigateByUrl('/home')
+          .then(r => console.log('Signed In', r));
+      });
   }
+
 
   sign() {
     this.url === URLs.LOGIN ? this.signIn() : this.signUp();
