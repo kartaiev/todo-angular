@@ -28,6 +28,34 @@ export class AuthService {
       });
   }
 
+  facebookSighnIn() {
+    return new Promise<any>((resolve, reject) => {
+      const provider = new firebase.auth.FacebookAuthProvider();
+      this.fireAuth
+        .signInWithPopup(provider)
+        .then(res => {
+          resolve(res);
+        }, err => {
+          console.log(err);
+          reject(err);
+        });
+    });
+  }
+
+  googleSignIn() {
+    return new Promise<any>((resolve, reject) => {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      provider.addScope('profile');
+      provider.addScope('email');
+      this.fireAuth
+        .signInWithPopup(provider)
+        .then(res => {
+          resolve(res);
+        });
+    });
+  }
+
+
   SignIn(email: string, password: string) {
     this.fireAuth
       .signInWithEmailAndPassword(email, password)
@@ -41,9 +69,9 @@ export class AuthService {
 
   SignOut() {
     this.fireAuth.signOut().then(() => {
-        this.router.navigateByUrl('/login')
-          .then(r => console.log('logged out', r));
-      });
+      this.router.navigateByUrl('/login')
+        .then(r => console.log('logged out', r));
+    });
     this.setIsLogged(false);
   }
 

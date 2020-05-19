@@ -2,8 +2,8 @@
   <div class="title">
     <h1>{{url === '/login' ? 'Sign In' : 'Sign Up'}}</h1>
     <div class="icons">
-      <fa-icon [icon]="google"></fa-icon>
-      <fa-icon [icon]="facebook"></fa-icon>
+      <fa-icon (click)="googleSignIn()" [icon]="google"></fa-icon>
+      <fa-icon (click)="facebookSignIn()" [icon]="facebook"></fa-icon>
     </div>
   </div>
   <mat-form-field appearance="outline" color="accent">

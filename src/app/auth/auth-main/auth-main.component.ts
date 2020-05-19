@@ -44,6 +44,14 @@ export class AuthMainComponent implements OnInit {
     this.router.navigateByUrl('/home').then(r => console.log('Signed In', r));
   }
 
+  facebookSignIn() {
+    this.authService.facebookSighnIn().then(() => console.log('successfully signed in'));
+  }
+
+  googleSignIn() {
+    this.authService.googleSignIn().then(() => console.log('successfully signed in'));
+  }
+
   sign() {
     this.url === URLs.LOGIN ? this.signIn() : this.signUp();
     this.authService.setIsLogged(true);
