@@ -77,6 +77,7 @@ export class TodosListComponent implements OnInit, OnDestroy {
       if (data) {
         this.dataService.getTodos(data.uid).subscribe(tasks => {
           this.todos = tasks.filter(task => !task.completed);
+          this.todos.sort((a, b) => +b.created - +a.created);
           this.dataService.setTodos(this.todos);
           this.dataService.setFilteredTodos(this.todos);
         });
